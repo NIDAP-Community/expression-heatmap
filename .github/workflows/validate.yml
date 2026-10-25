@@ -1,0 +1,31 @@
+name: Validate Expression Heatmap application
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: NIDAP-Community/OMIX
+          ref: f53dd7670d161b50427b0446ec48b8ae8d54f56f
+          path: canonical-omix
+      - name: Verify pinned scientific export
+        run: |
+          set -euo pipefail
+          cmp R/OMIX_Expression_Heatmap.R canonical-omix/modules/OMIX-Expression-Heatmap/R/OMIX_Expression_Heatmap.R
+          cmp scripts/run_expression_heatmap.R canonical-omix/modules/OMIX-Expression-Heatmap/scripts/run_expression_heatmap.R
+          cmp schemas/interface.yml canonical-omix/modules/OMIX-Expression-Heatmap/schemas/interface.yml
+          cmp module.yml canonical-omix/modules/OMIX-Expression-Heatmap/module.yml
+      - run: container/build_docker.sh expression-heatmap:ci
+      - run: container/smoke_test.sh expression-heatmap:ci
+      - run: container/parity_test.sh expression-heatmap:ci canonical-omix/modules/OMIX-Expression-Heatmap

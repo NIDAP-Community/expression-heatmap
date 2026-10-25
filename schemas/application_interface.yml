@@ -1,0 +1,27 @@
+application_interface_version: 1
+application: expression-heatmap
+canonical_interface: schemas/interface.yml
+container:
+  architecture: linux/amd64
+  input_mount: /data
+  input_read_only: true
+  output_mount: /output
+  output_writable: true
+inputs:
+  expression_matrix:
+    container_path: /data/expression_matrix.tsv
+    source: declared normalized continuous expression workflow artifact
+  sample_metadata:
+    container_path: /data/sample_metadata.tsv
+    source: declared cohort annotation workflow artifact
+requirements:
+  - Use an immutable OCI image digest.
+  - Pass only fields represented in the canonical interface.
+  - Require --output_dir /output.
+  - Verify selected sample IDs and annotation columns before launch.
+result_bundle:
+  manifest: run_manifest.json
+  metadata: RUN_METADATA.md
+  figure: figures/expression_heatmap.png
+  plotted_matrix: tables/expression_heatmap_matrix.csv
+  canonical_summary: logs/expression_heatmap_run_summary.txt
