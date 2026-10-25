@@ -2,10 +2,10 @@
 
 `expression-heatmap` is a containerized R application for rendering annotated
 expression heatmaps from a normalized continuous feature-by-sample matrix and
-matching sample metadata. It is designed for command-line, HPC, and OncoChat
-use: an application layer stages declared inputs under `/data`, the container
-writes a self-describing result bundle to `/output`, and no database
-credentials enter the image.
+matching sample metadata. It runs reproducibly from the command line, in a
+Docker container, or on HPC through Apptainer/Singularity. Supply explicit
+input tables and an output directory; the tool writes a self-describing result
+bundle without changing the input data.
 
 It is a pinned derivation of the canonical [OMIX Expression
 Heatmap](https://github.com/NIDAP-Community/OMIX/tree/main/modules/OMIX-Expression-Heatmap)
@@ -14,7 +14,7 @@ byte-for-byte; see [OMIX_MODULE_SOURCE.md](OMIX_MODULE_SOURCE.md).
 
 ## Container image
 
-Use the immutable image reference for reproducible runs and OncoChat:
+Use the immutable image reference for reproducible runs:
 
 ```text
 ghcr.io/nidap-community/expression-heatmap@sha256:565dd7cd5117eb062d2f10b96bf6725e63f9332782f61e2c0e45629bec3b58d4
@@ -124,14 +124,6 @@ output/
 
 The matrix under `tables/` is the exact matrix plotted after canonical
 duplicate-feature aggregation, selection, and optional row standardization.
-
-## OncoChat integration
-
-OncoChat chooses the cohort, materializes the declared normalized-expression
-and metadata tables, then invokes a released image by immutable digest. It
-does not pass database credentials into this image. See
-[docs/oncochat_adapter_contract.md](docs/oncochat_adapter_contract.md) and
-[schemas/application_interface.yml](schemas/application_interface.yml).
 
 ## Validation
 
