@@ -12,6 +12,17 @@ Heatmap](https://github.com/NIDAP-Community/OMIX/tree/main/modules/OMIX-Expressi
 module. The canonical scientific implementation and interface are retained
 byte-for-byte; see [OMIX_MODULE_SOURCE.md](OMIX_MODULE_SOURCE.md).
 
+## Container image
+
+Use the immutable image reference for reproducible runs and OncoChat:
+
+```text
+ghcr.io/nidap-community/expression-heatmap@sha256:565dd7cd5117eb062d2f10b96bf6725e63f9332782f61e2c0e45629bec3b58d4
+```
+
+It was built from application commit `a283a95` for `linux/amd64`. A mutable
+`latest` tag is intentionally not used as a deployment identity.
+
 ## Example output
 
 This compact public TCGA-BRCA example displays 12 named breast-cancer genes

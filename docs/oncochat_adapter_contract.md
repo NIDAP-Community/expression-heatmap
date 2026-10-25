@@ -5,6 +5,12 @@ invokes a released `linux/amd64` image by immutable OCI digest. It never passes
 database credentials, host paths, arbitrary shell flags, or unapproved source
 tables into the image.
 
+Current validated application image:
+
+```text
+ghcr.io/nidap-community/expression-heatmap@sha256:565dd7cd5117eb062d2f10b96bf6725e63f9332782f61e2c0e45629bec3b58d4
+```
+
 ## Required staged artifacts
 
 | Container path | Required form |
