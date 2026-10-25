@@ -129,7 +129,12 @@ if (length(output_index) == 1L && output_index < length(args)) {
 
 # Keep any incidental graphics-device state inside the declared writable output.
 setwd(output_dir)
-status <- system2(file.path(R.home("bin"), "Rscript"), c("--vanilla", canonical_cli, args))
+# `system2()` constructs a shell command on some R platforms. Quote each
+# argument so free-text controls such as --heatmap_title keep embedded spaces.
+status <- system2(
+  file.path(R.home("bin"), "Rscript"),
+  c("--vanilla", shQuote(canonical_cli), shQuote(args))
+)
 if (identical(as.integer(status), 0L)) {
   write_result_bundle(output_dir, args)
   unlink(file.path(output_dir, "Rplots.pdf"), force = TRUE)

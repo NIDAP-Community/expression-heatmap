@@ -12,6 +12,19 @@ Heatmap](https://github.com/NIDAP-Community/OMIX/tree/main/modules/OMIX-Expressi
 module. The canonical scientific implementation and interface are retained
 byte-for-byte; see [OMIX_MODULE_SOURCE.md](OMIX_MODULE_SOURCE.md).
 
+## Example output
+
+This compact public TCGA-BRCA example displays 12 named breast-cancer genes
+across 16 primary-tumor samples, with the cBioPortal patient-level subtype as
+a top annotation. It demonstrates the default row-standardized display and
+grouped column ordering; it is a documentation example, not a cohort-wide
+analysis.
+
+![Annotated expression heatmap from the public TCGA-BRCA documentation example](docs/images/tcga_brca_expression_heatmap.png)
+
+The source, retrieval date, selected samples/genes, and transformation are
+recorded in [docs/README_EXAMPLE_PROVENANCE.md](docs/README_EXAMPLE_PROVENANCE.md).
+
 ## Input contract
 
 Use continuous values appropriate for visualization: normalized bulk

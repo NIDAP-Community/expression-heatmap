@@ -13,6 +13,7 @@ output_dir="${smoke_root}/output"
   --group_columns Group,Batch \
   --include_all_genes true \
   --filter_top_genes_by_variance false \
+  --heatmap_title "Smoke test heatmap" \
   --output_dir /output
 
 for artifact in \
